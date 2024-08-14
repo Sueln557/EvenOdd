@@ -1,0 +1,116 @@
+<!--SueN-Even/Odd-->
+<!--Dev 109-->
+<!--08/15/2024-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Sue Ng">
+    <title>SueN-Even/Odd (gh-pages)</title>
+    <link href="evenodd.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <script>
+        let user = null;
+        let playagain = 'y';
+        let evenoddchoice = null;
+        let evenodd = null;
+        let flag = true;
+        let word = null;
+        let flag_word = null
+        let x = 0;
+        let computer = 0;
+        let result = null;
+        let wins = 0;
+        let loses = 0;
+        //get user's name
+        user = prompt('What is your Name?: ');
+
+        while (playagain.toLowerCase() === 'y' || playagain.toLowerCase().localeCompare("yes") === 0) {  //begin while loop
+
+            //Prompts for user character even/odd
+            evenoddchoice = prompt(user + ', choose (O)dd/(E)ven o/e: ');
+            if (evenoddchoice == null) {  //Exit on [Cancel] button at initial of game
+                break;
+            } else {
+                evenoddchoice = evenoddchoice.toLowerCase();
+
+                if (evenoddchoice === "o" || evenoddchoice.localeCompare("odd") === 0) {
+                    word = "Odd";
+                } else if (evenoddchoice === "e" || evenoddchoice.localeCompare("even") === 0) {
+                    word = "Even";
+                } else {
+                    continue;
+                }
+
+                //random generator for computer's choice
+                computer = 0;
+                do {
+                    const randomIndex = Math.floor(Math.random() * 4);
+                    computer += randomIndex;
+                    x += 1;
+                } while (x < 2);
+
+                // determine even or number from computer's choice
+                if ((computer % 2) === 0) {
+                    flag = true;
+                    flag_word = "even";
+                } else {
+                    flag = false;
+                    flag_word = "odd";
+                }
+
+                // who wins and loses
+                result = null;
+                if (flag && word.localeCompare("Even") === 0) {
+                    result = "win";
+                    wins++;
+                }
+                else if (flag && word.localeCompare("Odd") === 0) {
+                    result = "lose";
+                    loses++;
+                }
+                else if (!flag && word.localeCompare("Odd") === 0) {
+                    result = "win";
+                    wins++;
+                }
+                else if (!flag && word.localeCompare("Even") === 0) {
+                    result = "lose";
+                    loses++;
+                }
+                else
+                    console.log("Error in result")
+
+            }
+
+            console_output = user + ", you choose " + word + ", the sum was " + computer + " which is an " + flag_word + " number, you " + result + "!\n";
+            alert(console_output);
+
+            //reset variables and ask user whether they want to playagain
+            word = null;
+            computer = 0;
+            flag_word = null;
+            result = null;
+            x = 0;
+            console_output2 = "That's " + wins + " wins and " + loses + " losses!\n";
+            alert(console_output2);
+            do {
+                playagain = prompt('Would you like to play again? Enter y/n');
+
+                if (playagain.toLowerCase() === 'y' || playagain.toLowerCase() === 'n') {
+                    if (playagain.toLowerCase() === 'n') {
+                        break;
+                    }
+                } else {
+                    alert("Invalid input. Please try again.");
+                }
+            } while (playagain.toLowerCase() !== 'y' && playagain.toLowerCase() !== 'n');
+        }
+     //end while loop
+    </script>
+</body>
+
+</html>
